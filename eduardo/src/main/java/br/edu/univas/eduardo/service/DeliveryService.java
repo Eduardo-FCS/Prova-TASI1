@@ -20,7 +20,7 @@ public class DeliveryService {
 	}
 	
 	public DeliveryEntity toEntity(DeliveryDTO dto) {
-		return new DeliveryEntity(dto.getOrderCode(), dto.getCpf(), dto.getDate(), dto.getCep(), dto.getDeliveryStatus(), dto.isDeliveryActive());
+		return new DeliveryEntity(dto.getOrderCode(), dto.getCpf(), dto.getDate(), dto.getCep(), dto.getDeliveryStatus(), dto.isActive());
 	}
 	
 	public void createProduct(DeliveryDTO delivery) {
@@ -29,7 +29,19 @@ public class DeliveryService {
 	
 	public DeliveryEntity findById(long code) {
 		Optional<DeliveryEntity> obj = repo.findById(code);
-		DeliveryEntity entity = obj.orElseThrow(() -> new RuntimeException());
+		DeliveryEntity entity = obj.orElseThrow(() -> new RuntimeException("Don't find the code " + code + "         "));
 		return entity;
 	}
+	
+	public void activeDelivery(Long code) {
+		Optional<DeliveryEntity> x = repo.findById(code);
+		if (x.isEmpty()) {
+			throw new RuntimeException("Haven't the code " + code + "              ");
+		}
+		DeliveryEntity delivery = x.get();
+		delivery.setActive(!delivery.isActive());
+		repo.save(delivery);
+	}
+	
+	
 }

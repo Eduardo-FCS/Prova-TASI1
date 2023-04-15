@@ -17,7 +17,7 @@ public class DeliveryDTO {
 	private String date;
 	private int cep;
 	private String deliveryStatus;
-	private boolean deliveryActive;
+	private boolean active;
 
 	public DeliveryDTO(DeliveryEntity delivery) {
 		this.orderCode = delivery.getOrderCode();
@@ -25,6 +25,6 @@ public class DeliveryDTO {
 		this.date = delivery.getDate();
 		this.cep = delivery.getCep();
 		this.deliveryStatus = delivery.getDeliveryStatus();
-		this.deliveryActive = delivery.isActive();
+		this.active = delivery.isActive();
 	}
 }

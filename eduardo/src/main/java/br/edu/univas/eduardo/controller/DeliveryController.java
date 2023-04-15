@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -32,6 +33,12 @@ public class DeliveryController {
 	public ResponseEntity<DeliveryDTO> getDeliveryById(@PathVariable Long code) {
 		DeliveryDTO ent = new DeliveryDTO(service.findById(code));
 		return ResponseEntity.ok().body(ent);
+	}
+	
+	@PutMapping("/active/{code}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void activeDelivery(@PathVariable Long code) {
+		service.activeDelivery(code);
 	}
 
 }
