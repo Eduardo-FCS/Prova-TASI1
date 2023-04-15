@@ -24,6 +24,6 @@ public class DeliveryEntity {
 	private String date;
 	private int cep;
 	private String deliveryStatus;
-	private boolean deliveryActive;
+	private boolean active;
 
 }

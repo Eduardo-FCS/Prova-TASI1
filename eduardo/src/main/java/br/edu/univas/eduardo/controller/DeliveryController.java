@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.univas.eduardo.dto.DeliveryDTO;
 import br.edu.univas.eduardo.entities.DeliveryEntity;
 import br.edu.univas.eduardo.service.DeliveryService;
 
@@ -23,14 +24,13 @@ public class DeliveryController {
 	
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createProduct(@RequestBody DeliveryEntity delivery) {
+	public void createProduct(@RequestBody DeliveryDTO delivery) {
 		service.createProduct(delivery);
 	}
 	
 	@GetMapping("/{code}")
-	public ResponseEntity<DeliveryEntity> getDeliveryById(@PathVariable Long code) {
-		DeliveryEntity ent = new DeliveryEntity();
-		ent = service.findById(code);
+	public ResponseEntity<DeliveryDTO> getDeliveryById(@PathVariable Long code) {
+		DeliveryDTO ent = new DeliveryDTO(service.findById(code));
 		return ResponseEntity.ok().body(ent);
 	}
 
